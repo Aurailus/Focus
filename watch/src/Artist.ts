@@ -10,8 +10,8 @@ const TITLE_SPACING = 2;
 /** The text size of the event title. */
 const TITLE_SIZE = 16;
 
-// TODO: placeholders
-const COLOR_LIGHT_DIM = 'rgba(65, 199, 232, 0.25)';
+/** The color that displays behind event names. */
+const EVENT_BACKGROUND_COLOR = 'rgba(65, 199, 232, 0.2)';
 
 /**
  * Handles drawing shapes used by the watch face.
@@ -210,7 +210,7 @@ export default class Artist {
 			event.end.getMinutes() / 60) / 12 * 360 - EVENT_WIDTH / 8 - 90);
 
 		ctx.beginPath();
-		ctx.fillStyle = COLOR_LIGHT_DIM;
+		ctx.fillStyle = EVENT_BACKGROUND_COLOR;
 
 		ctx.arc(0, 0, dist, startAngle, endAngle, false);
 

@@ -3,10 +3,9 @@ import { degToRad } from './Util';
 import { getEvents, Event } from './Events';
 import { getTheme, NotchMode, Theme } from './Theme';
 
-// TODO: placeholders
-const COLOR_LIGHT_DIM = 'rgba(65, 199, 232, 0.15)';
-const COLOR_LIGHT_OVERLAY = 'rgba(65, 199, 232, 0.33)';
-const COLOR_MINUTE_HAND = 'rgba(65, 199, 232, 0.8)';
+const NOTCH_MINUTE_COLOR = 'rgba(65, 199, 232, 0.15)';
+const NOTCH_HOUR_COLOR = 'rgba(65, 199, 232, 0.33)';
+const NOTCH_QUARTER_COLOR = 'rgba(65, 199, 232, 0.8)';
 
 /** The minimum distance that all elements should be from the screen edge. */
 const OUTER_BUFFER = 2;
@@ -110,15 +109,15 @@ export default class Watch {
 			for (let i = 0; i < 12 * 5; i++) {
 				if (i % 15 === 0) {
 					artist.circle(degToRad(i / (12 * 5) * 360),
-						artist.radius - OUTER_BUFFER - 4, 4, COLOR_MINUTE_HAND);
+						artist.radius - OUTER_BUFFER - 4, 4, NOTCH_QUARTER_COLOR);
 				}
 				else if (i % 5 === 0 && theme.notchMode >= NotchMode.HOURS) {
 					artist.circle(degToRad(i / (12 * 5) * 360 - 90),
-						artist.radius - OUTER_BUFFER - 4, 3, COLOR_LIGHT_OVERLAY);
+						artist.radius - OUTER_BUFFER - 4, 3, NOTCH_HOUR_COLOR);
 				}
 				else if (theme.notchMode >= NotchMode.MINUTES) {
 					artist.circle(degToRad(i / (12 * 5) * 360 - 90),
-						artist.radius - OUTER_BUFFER - 4, 2, COLOR_LIGHT_DIM);
+						artist.radius - OUTER_BUFFER - 4, 2, NOTCH_MINUTE_COLOR);
 				}
 			}
 		}
@@ -130,16 +129,17 @@ export default class Watch {
 			}
 		}
 
-		artist.circle(0, 0, 18, COLOR_LIGHT_OVERLAY);
+		artist.circle(0, 0, 18, NOTCH_HOUR_COLOR);
 		artist.circle(0, 0, 10, '#fff');
 
 		if (theme.showMinutes) {
 			const minuteAngle = degToRad((time.getMinutes() + time.getSeconds() / 60) / 60 * 360 - 180);
-			artist.rounded(minuteAngle, 40, artist.radius - 64, 16, COLOR_MINUTE_HAND);
+			artist.rounded(minuteAngle, 40, artist.radius - 64, 16, NOTCH_QUARTER_COLOR);
 		}
 
 		const hourAngle = degToRad(((time.getHours() % 12) + time.getMinutes() / 60) / 12 * 360 - 180);
-		artist.rounded(hourAngle, 42, artist.radius - 80, 16, 'rgba(0, 0, 0, 0.15)', '#fff', 4);
+		artist.rounded(hourAngle, 42, artist.radius - 92, 16,
+			'rgba(0, 0, 0, 0.15)', '#fff', 4);
 
 		if (!this.ambient) this.animTimeout = setTimeout(() =>
 			this.animReq = window.requestAnimationFrame(() => this.draw()),
