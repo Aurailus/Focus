@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+  <string name="app_name">FocusCompanion</string>
+  <string name="preferences_key">com.aurailus.focuscompanion.PREFERENCE_FILE_KEY</string>
+</resources>
