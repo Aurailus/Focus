@@ -1,12 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <widget xmlns:tizen='http://tizen.org/ns/widgets' xmlns='http://www.w3.org/ns/widgets' id='http://yourdomain/Focus' version='1.0.0' viewmodes='maximized'>
     <tizen:application id='kFVD8WK8ro.Focus' package='kFVD8WK8ro' required_version='2.3.1' ambient_support='enable'/>
-    <tizen:category name='http://tizen.org/category/wearable_clock'/>
+    <!-- <tizen:category name='http://tizen.org/category/wearable_clock'/> -->
     <feature name='http://tizen.org/feature/screen.shape.circle'/>
     <feature name='http://tizen.org/feature/screen.size.all'/>
-    <feature name='http://tizen.org/feature/calendar'/>
-    <feature name='http://tizen.org/feature/calendar.read'/>
-    <feature name='http://tizen.org/feature/calendar.write'/>
     <content src='index.html'/>
     <icon src='icon.png'/>
     <name>Focus</name>

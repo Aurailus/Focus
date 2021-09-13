@@ -4,7 +4,7 @@
   "description": "Tizen application for the Focus Watch Face.",
   "main": "build/Main.js",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "webpack --watch --progress --config webpack.ts"
   },
   "repository": {
     "type": "git",
@@ -31,9 +31,22 @@
   },
   "homepage": "https://github.com/Aurailus/Focus#readme",
   "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-typescript": "^7.15.0",
     "@types/tizen-common-web": "^2.0.1",
+    "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.32.0",
+    "fork-ts-checker-webpack-plugin": "^6.3.3",
     "nodemon": "^2.0.12",
     "ts-node": "^10.2.1",
-    "typescript": "^4.4.3"
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-merge": "^5.8.0"
   }
 }

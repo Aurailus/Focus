@@ -3,13 +3,16 @@
 		"strict": true,
 		"alwaysStrict": true,
 
-		"target": "es5",
-		"outFile": "build/main.js",
+		"target": "es6",
+		"module": "commonjs",
 		"esModuleInterop": true,
 		"moduleResolution": "node",
+		"lib": [ "dom", "es2015" ],
 
 		"typeRoots": [ "./node_modules/@types/" ],
 
+    "noEmitHelpers": true,
+    "importHelpers": true,
 		"removeComments": true,
 		"noUnusedLocals": true,
 		"noImplicitReturns": true,
