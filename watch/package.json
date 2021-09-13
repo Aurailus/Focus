@@ -1,0 +1,39 @@
+{
+  "name": "focus-watch",
+  "version": "0.0.1",
+  "description": "Tizen application for the Focus Watch Face.",
+  "main": "build/Main.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aurailus/Focus.git"
+  },
+  "keywords": [
+    "watch",
+    "tizen",
+    "calendar",
+    "scheduling"
+  ],
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "extensions": ".js",
+    "quiet": true,
+    "exec": "tsc"
+  },
+  "author": "Auri Collings <me@auri.xyz>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Aurailus/Focus/issues"
+  },
+  "homepage": "https://github.com/Aurailus/Focus#readme",
+  "devDependencies": {
+    "@types/tizen-common-web": "^2.0.1",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}

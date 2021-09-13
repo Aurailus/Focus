@@ -1,0 +1,28 @@
+{
+  "name": "focus",
+  "private": "true",
+  "version": "0.0.1",
+  "description": "Scripts for the Focus MonoRepo.",
+  "scripts": {
+    "dev": "npm run dev-watch & npm run dev-companion",
+    "dev-watch": "cd watch && npm run dev",
+    "dev-companion": "cd companion && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aurailus/Focus.git"
+  },
+  "keywords": [
+    "watch",
+    "tizen",
+    "android",
+    "calendar",
+    "scheduling"
+  ],
+  "author": "Auri Collings <me@auri.xyz>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Aurailus/Focus/issues"
+  },
+  "homepage": "https://github.com/Aurailus/Focus#readme"
+}
