@@ -13,15 +13,20 @@ const TITLE_SIZE = 16;
 /** The color that displays behind event names. */
 const EVENT_BACKGROUND_COLOR = 'rgba(65, 199, 232, 0.2)';
 
+/** 90 degree turn in radians. */
+const QUARTER_TURN = degToRad(90);
+
 /**
  * Handles drawing shapes used by the watch face.
  * init() loads resources, and **must** be awaited before using any operations.
  */
 
 export default class Artist {
-	readonly radius: number;
+	icons: Record<string, HTMLImageElement>;
 
+	readonly radius: number;
 	readonly ctx: CanvasRenderingContext2D;
+
 	private glowCtx: CanvasRenderingContext2D;
 	private glowImg: HTMLImageElement;
 
@@ -34,6 +39,7 @@ export default class Artist {
 	constructor(canvas: HTMLCanvasElement | CanvasRenderingContext2D) {
 		if ('getContext' in canvas) this.ctx = canvas.getContext('2d')!;
 		else this.ctx = canvas;
+		this.icons = {};
 		this.radius = this.ctx.canvas.width / 2;
 
 		const glowCanvas = document.createElement('canvas');
@@ -43,18 +49,30 @@ export default class Artist {
 		this.glowImg = null as any;
 	}
 
+	loadImage(path: string): Promise<HTMLImageElement> {
+		return new Promise<HTMLImageElement>(resolve => {
+			const img = document.createElement('img');
+			img.onload = () => resolve(img);
+			img.src = path;
+		});
+	}
+
 	/**
 	 * Loads resources needed for certain draw operations.
 	 *
 	 * @returns a promise indicating that the loading is complete.
 	 */
 
-	init(): Promise<void> {
-		return new Promise<void>(resolve => {
-			this.glowImg = document.createElement('img');
-			this.glowImg.onload = () => resolve();
-			this.glowImg.src = '../res/glow.png';
-		});
+	async init(): Promise<void> {
+		const [ glowImg, battery, steps, heart ] = await Promise.all([
+			this.loadImage('../res/glow.png'),
+			this.loadImage('../res/battery.svg'),
+			this.loadImage('../res/steps.svg'),
+			this.loadImage('../res/heart.svg')
+		]);
+
+		this.glowImg = glowImg;
+		this.icons = { battery, steps, heart };
 	}
 
 	/**
@@ -72,21 +90,32 @@ export default class Artist {
 	 * @param radians - The angle in radians to draw the circle at, starting at the top and moving clockwise.
 	 * @param dist - The distance from the center of the canvas to draw the circle at.
 	 * @param radius - The radius of the circle to draw.
-	 * @param color - The color to draw the circle with.
+	 * @param fill - The color to fill the circle with. undefined will result in no fill.
+	 * @param stroke - The color to trace the circle with. undefined will result in no stroke.
+	 * @param strokeWidth - The width of the stroke for the circle with. undefined will result in no stroke.
 	 */
 
-	circle(radians: number, dist: number, radius: number, color: string) {
+	circle(radians: number, dist: number, radius: number, fill?: string, stroke?: string, strokeWidth?: number) {
 		const { ctx, radius: canvRadius } = this;
 
 		ctx.save();
 		ctx.translate(canvRadius, canvRadius);
-		ctx.rotate(radians);
+		ctx.rotate(radians - QUARTER_TURN);
 
 		ctx.beginPath();
 		ctx.arc(dist, 0, radius, 0, 2 * Math.PI, false);
-		ctx.fillStyle = color;
-		ctx.fill();
 		ctx.closePath();
+
+		if (fill) {
+			ctx.fillStyle = fill;
+			ctx.fill();
+		}
+
+		if (stroke && strokeWidth) {
+			ctx.strokeStyle = stroke;
+			ctx.lineWidth = strokeWidth;
+			ctx.stroke();
+		}
 
 		ctx.restore();
 	}
@@ -249,14 +278,15 @@ export default class Artist {
 
 		ctx.restore();
 
-		this.circle(startAngle, dist - EVENT_WIDTH / 2, EVENT_WIDTH / 2 - 4, event.color);
+		this.circle(startAngle + QUARTER_TURN,
+			dist - EVENT_WIDTH / 2, EVENT_WIDTH / 2 - 4, event.color);
 
 		ctx.font = `900 ${TITLE_SIZE}px Arial sans-serif`;
 		ctx.fillStyle = '#fff';
 		ctx.textBaseline = 'top';
 		ctx.textAlign = 'center';
 
-		let currentAngle = startAngle + degToRad(96);
+		let currentAngle = startAngle + QUARTER_TURN + degToRad(6);
 		for (let i = 0; i < event.title.length; i++) {
 			ctx.save();
 			ctx.translate(canvRadius, canvRadius);

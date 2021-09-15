@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, View, Pressable, Text, ScrollView, Switch, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Switch, FlatList } from 'react-native';
+
+import { Button } from '../field';
 import * as Calendars from '../native/Calendars';
 
 interface CalendarItemProps {
@@ -30,16 +32,14 @@ function CalendarItem(props: CalendarItemProps) {
   }, [ props.enabled ]);
 
   return (
-    <View style={styles.item}>
-      <Pressable android_ripple={{ color: '#14181f' }} style={styles.itemPressable} onPress={props.onSwitch}>
-        <View style={[ styles.itemDot, { backgroundColor: props.color }]}/>
-        <Text style={[ styles.itemTitle, { color: props.enabled ? '#c0d8dd' : '#567' }]}>{props.title}</Text>
-        <Switch
-          trackColor={{ false: switchColors.background, true: switchColors.background }}
-          thumbColor={switchColors.foreground}
-          value={props.enabled} onValueChange={props.onSwitch}/>
-      </Pressable>
-    </View>
+    <Button background={false} onPress={props.onSwitch} pressableStyle={styles.item}>
+      <View style={[ styles.itemDot, { backgroundColor: props.color }]}/>
+      <Text style={[ styles.itemTitle, { color: props.enabled ? '#c0d8dd' : '#567' }]}>{props.title}</Text>
+      <Switch
+        trackColor={{ false: switchColors.background, true: switchColors.background }}
+        thumbColor={switchColors.foreground}
+        value={props.enabled} onValueChange={props.onSwitch}/>
+    </Button>
   );
 };
 
@@ -90,16 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#11161f'
   },
   item: {
-    borderRadius: 8,
-    overflow: 'hidden',
-    height: 52,
-  },
-  itemPressable: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingStart: 12,
-    paddingRight: 16,
-    flex: 1
+    flexDirection: 'row'
   },
   itemDot: {
     width: 12,

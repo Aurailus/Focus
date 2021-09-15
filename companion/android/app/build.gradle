@@ -141,7 +141,7 @@ android {
         versionName "1.0.0"
 
         ndk {
-            abiFilters 'armeabi-v7a'
+            abiFilters 'armeabi-v7a', 'x86', 'armeabi-v8a', 'x86_64'
         }
     }
     splits {
@@ -197,6 +197,8 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
     implementation "com.android.support:recyclerview-v7:$supportLibVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation files('libs/accessory-v2.6.4.jar')
+    implementation files('libs/sdk-v1.0.0.jar')
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }

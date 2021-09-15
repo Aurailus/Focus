@@ -1,0 +1,23 @@
+<resources>
+    <application name="MyApplication">
+        <serviceProfile
+            id="/com/aurailus/focus/SyncAP"
+            name="SyncAP"
+            role="provider"
+            serviceImpl="com.aurailus.focuscompanion.Service"
+            version="1.0"
+            serviceLimit="ANY"
+            serviceTimeout="10">
+            <supportedTransports>
+                <transport type="TRANSPORT_BT" />
+                <transport type="TRANSPORT_WIFI" />
+            </supportedTransports>
+            <serviceChannel
+                id="110"
+                dataRate="low"
+                priority="low"
+                reliability= "enable"
+                />
+        </serviceProfile>
+    </application>
+</resources>

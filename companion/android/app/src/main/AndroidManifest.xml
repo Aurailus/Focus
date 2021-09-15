@@ -1,21 +1,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.aurailus.focuscompanion">
+
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
   <uses-permission android:name="android.permission.READ_CALENDAR" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="com.samsung.WATCH_APP_TYPE.Companion"/>
+
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="true" android:usesCleartextTraffic="true">
+    <meta-data android:name="AccessoryServicesLocation" android:value="/res/xml/accessoryservices.xml"/>
+    <meta-data android:name="gear_app_packagename" android:value="com.aurailus.focus"/>
+    <meta-data android:name="GearAppType" android:value="wgt"/>
+
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="true"/>
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="42.0.0"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="https://exp.host/@anonymous/FocusCompanion"/>
+
+    <service android:name="com.samsung.android.sdk.accessory.SAService"/>
+
     <activity android:name=".MainActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.App.SplashScreen" android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
@@ -24,6 +34,18 @@
         <data android:scheme="com.aurailus.focuscompanion"/>
       </intent-filter>
     </activity>
+
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
+
+    <receiver android:exported="false" android:name="com.samsung.android.sdk.accessory.RegisterUponInstallReceiver" >
+      <intent-filter>
+        <action android:name="com.samsung.accessory.action.REGISTER_AGENT"/>
+      </intent-filter>
+    </receiver>
+    <receiver android:exported="false" android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver" >
+      <intent-filter>
+        <action android:name="com.samsung.accessory.action.SERVICE_CONNECTION_REQUESTED"/>
+      </intent-filter>
+    </receiver>
   </application>
 </manifest>

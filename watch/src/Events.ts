@@ -22,8 +22,8 @@ export function getEvents(): Event[] {
 	};
 
 	return [
-		{ start: createDate(9, 30), end: createDate(11, 20), color: '#59acff', title: 'PAAS' },
-		{ start: createDate(12, 30), end: createDate(1, 20), color: '#59acff', title: 'STAT' },
-		{ start: createDate(1, 30), end: createDate(2, 20), color: '#59acff', title: 'MATH' }
+		{ start: createDate(9, 30), end: createDate(11, 20), color: '#59acff', title: 'Japanese' },
+		{ start: createDate(12, 30), end: createDate(1, 20), color: '#59acff', title: 'Stats' },
+		{ start: createDate(1, 30), end: createDate(2, 20), color: '#59acff', title: 'Math' }
 	];
 }

@@ -1,12 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<widget xmlns:tizen='http://tizen.org/ns/widgets' xmlns='http://www.w3.org/ns/widgets' id='http://yourdomain/Focus' version='1.0.0' viewmodes='maximized'>
+<widget xmlns:tizen='http://tizen.org/ns/widgets' xmlns='http://www.w3.org/ns/widgets' id='https://aurailus.com/Focus' version='1.0.0' viewmodes='maximized'>
     <tizen:application id='kFVD8WK8ro.Focus' package='kFVD8WK8ro' required_version='2.3.1' ambient_support='enable'/>
-    <!-- <tizen:category name='http://tizen.org/category/wearable_clock'/> -->
+    <tizen:category name='http://tizen.org/category/wearable_clock'/>
+    <feature name='http://developer.samsung.com/tizen/feature/network.accessory_protocol'/>
     <feature name='http://tizen.org/feature/screen.shape.circle'/>
     <feature name='http://tizen.org/feature/screen.size.all'/>
     <content src='index.html'/>
     <icon src='icon.png'/>
     <name>Focus</name>
+    <tizen:metadata key='AccessoryServicesLocation' value='res/accessoryservices.xml'/>
+    <tizen:metadata key='master_app_name' value='Focus Companion'/>
+    <tizen:metadata key='master_app_packagename' value='com.aurailus.focuscompanion'/>
     <tizen:privilege name='http://tizen.org/privilege/alarm'/>
+    <tizen:setting background-support='disable' encryption='disable'/>
     <tizen:profile name='wearable'/>
 </widget>
